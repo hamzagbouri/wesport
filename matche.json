@@ -1,0 +1,124 @@
+{
+    "matches": [
+      {
+        "day": "Journée 1 - 03/03",
+        "games": [
+          {
+            "team1": "Code Breakers",
+            "team2": "Code Benders",
+            "score": "4-9",
+            "status": "finished"
+          },
+          {
+            "team1": "codeshogun",
+            "team2": "enigma",
+            "score": "4-8",
+            "status": "finished"
+          }
+        ]
+      },
+      {
+        "day": "Journée 2 - 06/03",
+        "games": [
+          {
+            "team1": "quanta pixels",
+            "team2": "hassan team",
+            "score": "",
+            "status": "upcoming"
+          },
+          {
+            "team1": "Code Breakers",
+            "team2": "codeshogun",
+            "score": "",
+            "status": "upcoming"
+          }
+        ]
+      },
+      {
+        "day": "Journée 3 - 09/03",
+        "games": [
+          {
+            "team1": "Code Benders",
+            "team2": "Fc Javartalona",
+            "score": "",
+            "status": "upcoming"
+          },
+          {
+            "team1": "enigma",
+            "team2": "quanta pixels",
+            "score": "",
+            "status": "upcoming"
+          }
+        ]
+      },
+      {
+        "day": "Journée 4 - 10/03",
+        "games": [
+          {
+            "team1": "hassan team",
+            "team2": "Fc Javartalona",
+            "score": "",
+            "status": "upcoming"
+          },
+          {
+            "team1": "Code Breakers",
+            "team2": "enigma",
+            "score": "",
+            "status": "upcoming"
+          }
+        ]
+      },
+      {
+        "day": "Journée 5 - 13/03",
+        "games": [
+          {
+            "team1": "codeshogun",
+            "team2": "hassan team",
+            "score": "",
+            "status": "upcoming"
+          },
+          {
+            "team1": "quanta pixels",
+            "team2": "Code Benders",
+            "score": "",
+            "status": "upcoming"
+          }
+        ]
+      },
+      {
+        "day": "Journée 6 - 16/03",
+        "games": [
+          {
+            "team1": "Code Breakers",
+            "team2": "quanta pixels",
+            "score": "",
+            "status": "upcoming"
+          },
+          {
+            "team1": "enigma",
+            "team2": "Fc Javartalona",
+            "score": "",
+            "status": "upcoming"
+          }
+        ]
+      },
+      {
+        "day": "Journée 7 - 17/03",
+        "games": [
+          {
+            "team1": "Code Benders",
+            "team2": "hassan team",
+            "score": "",
+            "status": "upcoming"
+          },
+          {
+            "team1": "codeshogun",
+            "team2": "Fc Javartalona",
+            "score": "",
+            "status": "upcoming"
+          }
+        ]
+      }
+    ]
+  }
+  

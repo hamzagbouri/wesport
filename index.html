@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tournoi du Ramadan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+              950: '#042f2e',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-in': 'slideIn 0.5s ease-in-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideIn: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .animate-delay {
+      opacity: 0;
+      animation: fadeIn 0.5s ease-in-out forwards;
+    }
+    
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    .team-row {
+      transition: all 0.3s ease;
+    }
+    
+    .team-row:hover {
+      transform: translateX(5px);
+    }
+    
+    .match-card {
+      transition: all 0.3s ease;
+    }
+    
+    .match-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .tab-active {
+      color: #0d9488;
+      border-bottom: 2px solid #0d9488;
+    }
+    
+    .form-indicator {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: bold;
+      margin-right: 2px;
+    }
+    
+    .form-W {
+      background-color: #10b981;
+      color: white;
+    }
+    
+    .form-L {
+      background-color: #ef4444;
+      color: white;
+    }
+    
+    .form-D {
+      background-color: #f59e0b;
+      color: white;
+    }
+    
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #0d9488;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .sort-icon {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+    
+    .sort-icon.asc {
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-bottom: 6px solid currentColor;
+    }
+    
+    .sort-icon.desc {
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 6px solid currentColor;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-primary-50 to-primary-100 min-h-screen">
+  <header class="bg-white shadow-md">
+    <div class="container mx-auto px-4 py-6">
+      <div class="flex items-center justify-center">
+        <i class="fas fa-trophy text-primary-600 mr-3 text-2xl"></i>
+        <h1 class="text-3xl md:text-4xl font-bold text-center text-gray-800">
+          Tournoi du Ramadan
+        </h1>
+        <i class="fas fa-trophy text-primary-600 ml-3 text-2xl"></i>
+      </div>
+      <p class="text-center text-gray-600 mt-2">
+        Classement des équipes et calendrier des matchs
+      </p>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-8">
+    <div class="flex justify-center mb-6">
+      <div class="inline-flex rounded-md shadow-sm" role="group">
+        <button type="button" id="standings-tab" class="tab-active px-4 py-2 text-sm font-medium bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-primary-500 focus:text-primary-600">
+          <i class="fas fa-table-list mr-2"></i>Classement
+        </button>
+        <button type="button" id="matches-tab" class="px-4 py-2 text-sm font-medium bg-white border border-gray-200 rounded-r-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-primary-500 focus:text-primary-600">
+          <i class="fas fa-futbol mr-2"></i>Matchs
+        </button>
+      </div>
+    </div>
+
+    <div id="standings-section" class="animate-fade-in">
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="p-6 border-b border-gray-200">
+          <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+            <span class="bg-primary-600 w-2 h-6 rounded mr-3"></span>
+            Classement des Équipes
+          </h2>
+        </div>
+        <div class="p-4 overflow-x-auto">
+          <div id="standings-loader" class="loader"></div>
+          <table id="standings-table" class="w-full text-sm text-left hidden">
+            <thead class="text-xs uppercase bg-gray-100">
+              <tr>
+                <th class="px-4 py-3 rounded-tl-lg">#</th>
+                <th class="px-4 py-3">Équipe</th>
+                <th class="px-4 py-3 cursor-pointer" data-sort="played">
+                  MJ <span class="sort-icon"></span>
+                </th>
+                <th class="px-4 py-3 cursor-pointer" data-sort="wins">
+                  V <span class="sort-icon"></span>
+                </th>
+                <th class="px-4 py-3 cursor-pointer" data-sort="draws">
+                  N <span class="sort-icon"></span>
+                </th>
+                <th class="px-4 py-3 cursor-pointer" data-sort="losses">
+                  D <span class="sort-icon"></span>
+                </th>
+                <th class="px-4 py-3 cursor-pointer" data-sort="goalsFor">
+                  BP <span class="sort-icon"></span>
+                </th>
+                <th class="px-4 py-3 cursor-pointer" data-sort="goalsAgainst">
+                  BC <span class="sort-icon"></span>
+                </th>
+                <th class="px-4 py-3 cursor-pointer" data-sort="goalDiff">
+                  +/- <span class="sort-icon"></span>
+                </th>
+                <th class="px-4 py-3 cursor-pointer" data-sort="points">
+                  Pts <span class="sort-icon desc"></span>
+                </th>
+                <th class="px-4 py-3 rounded-tr-lg">Forme</th>
+              </tr>
+            </thead>
+            <tbody id="standings-body">
+              <!-- Teams will be inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="matches-section" class="animate-fade-in hidden">
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="p-6 border-b border-gray-200">
+          <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+            <span class="bg-primary-600 w-2 h-6 rounded mr-3"></span>
+            Calendrier des Matchs
+          </h2>
+        </div>
+        <div class="p-4">
+          <div id="matches-loader" class="loader"></div>
+          <div id="matches-container" class="hidden">
+            <div class="flex justify-center mb-6">
+              <div class="inline-flex rounded-md shadow-sm" role="group">
+                <button type="button" id="all-matches-tab" class="tab-active px-4 py-2 text-sm font-medium bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-primary-500 focus:text-primary-600">
+                  Tous
+                </button>
+                <button type="button" id="finished-matches-tab" class="px-4 py-2 text-sm font-medium bg-white border border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-primary-500 focus:text-primary-600">
+                  Terminés
+                </button>
+                <button type="button" id="upcoming-matches-tab" class="px-4 py-2 text-sm font-medium bg-white border border-gray-200 rounded-r-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-primary-500 focus:text-primary-600">
+                  À venir
+                </button>
+              </div>
+            </div>
+            <div id="matches-list" class="space-y-6">
+              <!-- Matches will be inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white mt-12 py-6 shadow-inner">
+    <div class="container mx-auto px-4">
+      <p class="text-center text-gray-600">
+        © <span id="current-year"></span> Tournoi du Ramadan. Tous droits réservés.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set current year in footer
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+      
+      // Tab switching
+      const standingsTab = document.getElementById('standings-tab');
+      const matchesTab = document.getElementById('matches-tab');
+      const standingsSection = document.getElementById('standings-section');
+      const matchesSection = document.getElementById('matches-section');
+      
+      standingsTab.addEventListener('click', function() {
+        standingsTab.classList.add('tab-active');
+        matchesTab.classList.remove('tab-active');
+        standingsSection.classList.remove('hidden');
+        matchesSection.classList.add('hidden');
+      });
+      
+      matchesTab.addEventListener('click', function() {
+        matchesTab.classList.add('tab-active');
+        standingsTab.classList.remove('tab-active');
+        matchesSection.classList.remove('hidden');
+        standingsSection.classList.add('hidden');
+      });
+      
+      // Matches tab switching
+      const allMatchesTab = document.getElementById('all-matches-tab');
+      const finishedMatchesTab = document.getElementById('finished-matches-tab');
+      const upcomingMatchesTab = document.getElementById('upcoming-matches-tab');
+      
+      allMatchesTab.addEventListener('click', function() {
+        allMatchesTab.classList.add('tab-active');
+        finishedMatchesTab.classList.remove('tab-active');
+        upcomingMatchesTab.classList.remove('tab-active');
+        document.querySelectorAll('.match-day').forEach(day => {
+          day.classList.remove('hidden');
+        });
+      });
+      
+      finishedMatchesTab.addEventListener('click', function() {
+        finishedMatchesTab.classList.add('tab-active');
+        allMatchesTab.classList.remove('tab-active');
+        upcomingMatchesTab.classList.remove('tab-active');
+        
+        document.querySelectorAll('.match-day').forEach(day => {
+          const hasFinishedMatches = day.querySelector('.match-card[data-status="finished"]');
+          day.classList.toggle('hidden', !hasFinishedMatches);
+        });
+        
+        document.querySelectorAll('.match-card').forEach(card => {
+          card.classList.toggle('hidden', card.getAttribute('data-status') !== 'finished');
+        });
+      });
+      
+      upcomingMatchesTab.addEventListener('click', function() {
+        upcomingMatchesTab.classList.add('tab-active');
+        allMatchesTab.classList.remove('tab-active');
+        finishedMatchesTab.classList.remove('tab-active');
+        
+        document.querySelectorAll('.match-day').forEach(day => {
+          const hasUpcomingMatches = day.querySelector('.match-card[data-status="upcoming"]');
+          day.classList.toggle('hidden', !hasUpcomingMatches);
+        });
+        
+        document.querySelectorAll('.match-card').forEach(card => {
+          card.classList.toggle('hidden', card.getAttribute('data-status') !== 'upcoming');
+        });
+      });
+      
+      // Load data
+      let teamsData = [];
+      let matchesData = {};
+      let currentSort = { field: 'points', direction: 'desc' };
+      
+      // Fetch teams data
+      fetch('./team.json')
+        .then(response => response.json())
+        .then(data => {
+          teamsData = data;
+          renderStandings();
+          document.getElementById('standings-loader').classList.add('hidden');
+          document.getElementById('standings-table').classList.remove('hidden');
+        })
+        .catch(error => {
+          console.error('Error loading teams data:', error);
+          document.getElementById('standings-loader').classList.add('hidden');
+          document.getElementById('standings-body').innerHTML = `
+            <tr>
+              <td colspan="11" class="px-4 py-6 text-center text-red-500">
+                Erreur lors du chargement des données d'équipes. Veuillez réessayer.
+              </td>
+            </tr>
+          `;
+          document.getElementById('standings-table').classList.remove('hidden');
+        });
+      
+      // Fetch matches data
+      fetch('./matche.json')
+        .then(response => response.json())
+        .then(data => {
+          matchesData = data;
+          renderMatches();
+          document.getElementById('matches-loader').classList.add('hidden');
+          document.getElementById('matches-container').classList.remove('hidden');
+        })
+        .catch(error => {
+          console.error('Error loading matches data:', error);
+          document.getElementById('matches-loader').classList.add('hidden');
+          document.getElementById('matches-list').innerHTML = `
+            <div class="text-center py-8 text-red-500">
+              Erreur lors du chargement des données de matchs. Veuillez réessayer.
+            </div>
+          `;
+          document.getElementById('matches-container').classList.remove('hidden');
+        });
+      
+      // Add sorting functionality
+      document.querySelectorAll('th[data-sort]').forEach(th => {
+        th.addEventListener('click', function() {
+          const field = this.getAttribute('data-sort');
+          
+          // Toggle sort direction or set default
+          if (currentSort.field === field) {
+            currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+          } else {
+            currentSort.field = field;
+            currentSort.direction = 'desc';
+          }
+          
+          // Update sort icons
+          document.querySelectorAll('.sort-icon').forEach(icon => {
+            icon.classList.remove('asc', 'desc');
+          });
+          
+          const sortIcon = this.querySelector('.sort-icon');
+          sortIcon.classList.add(currentSort.direction);
+          
+          renderStandings();
+        });
+      });
+      
+      function renderStandings() {
+        // Sort teams
+        const sortedTeams = [...teamsData].sort((a, b) => {
+          let valueA, valueB;
+          
+          if (currentSort.field === 'goalDiff') {
+            valueA = a.goalsFor - a.goalsAgainst;
+            valueB = b.goalsFor - b.goalsAgainst;
+          } else {
+            valueA = a[currentSort.field];
+            valueB = b[currentSort.field];
+          }
+          
+          if (currentSort.direction === 'asc') {
+            return valueA - valueB;
+          } else {
+            return valueB - valueA;
+          }
+        });
+        
+        // Render teams
+        const standingsBody = document.getElementById('standings-body');
+        standingsBody.innerHTML = '';
+        
+        sortedTeams.forEach((team, index) => {
+          const goalDiff = team.goalsFor - team.goalsAgainst;
+          const formHTML = team.form.map(result => {
+            return `<span class="form-indicator form-${result}">${result}</span>`;
+          }).join('');
+          
+          const row = document.createElement('tr');
+          row.className = `team-row border-b hover:bg-gray-50 ${index < 3 ? 'bg-primary-50' : ''}`;
+          row.style.animationDelay = `${index * 0.05}s`;
+          row.classList.add('animate-delay');
+          
+          row.innerHTML = `
+            <td class="px-4 py-3 font-medium">
+              ${index < 3 ? `
+                <div class="flex items-center">
+                  ${index + 1}
+                  <i class="fas fa-trophy ml-1 ${
+                    index === 0 ? 'text-yellow-500' : 
+                    index === 1 ? 'text-gray-400' : 'text-amber-700'
+                  }"></i>
+                </div>
+              ` : index + 1}
+            </td>
+            <td class="px-4 py-3 font-medium">
+              <div class="flex items-center">
+                <div class="w-6 h-6 mr-2 bg-gray-200 rounded-full overflow-hidden flex items-center justify-center text-xs font-bold">
+                  ${team.name.charAt(0)}
+                </div>
+                ${team.name}
+              </div>
+            </td>
+            <td class="px-4 py-3">${team.played}</td>
+            <td class="px-4 py-3">${team.wins}</td>
+            <td class="px-4 py-3">${team.draws}</td>
+            <td class="px-4 py-3">${team.losses}</td>
+            <td class="px-4 py-3">${team.goalsFor}</td>
+            <td class="px-4 py-3">${team.goalsAgainst}</td>
+            <td class="px-4 py-3">
+              <span class="${
+                goalDiff > 0 ? 'text-green-600' : 
+                goalDiff < 0 ? 'text-red-600' : ''
+              }">
+                ${goalDiff > 0 ? '+' : ''}${goalDiff}
+              </span>
+            </td>
+            <td class="px-4 py-3 font-bold">${team.points}</td>
+            <td class="px-4 py-3">${formHTML}</td>
+          `;
+          
+          standingsBody.appendChild(row);
+          
+          // Trigger animation after a small delay
+          setTimeout(() => {
+            row.style.opacity = 1;
+          }, 50);
+        });
+      }
+      
+      function renderMatches() {
+        const matchesList = document.getElementById('matches-list');
+        matchesList.innerHTML = '';
+        
+        if (!matchesData.matches || matchesData.matches.length === 0) {
+          matchesList.innerHTML = `
+            <div class="text-center py-8 text-gray-500">
+              Aucun match disponible.
+            </div>
+          `;
+          return;
+        }
+        
+        matchesData.matches.forEach((matchDay, dayIndex) => {
+          const dayElement = document.createElement('div');
+          dayElement.className = 'match-day mb-8';
+          dayElement.style.animationDelay = `${dayIndex * 0.1}s`;
+          dayElement.classList.add('animate-delay');
+          
+          const dayHeader = document.createElement('div');
+          dayHeader.className = 'flex items-center mb-4';
+          dayHeader.innerHTML = `
+            <div class="bg-primary-600 w-2 h-6 rounded mr-3"></div>
+            <h3 class="text-xl font-bold text-gray-800">${matchDay.day}</h3>
+          `;
+          
+          dayElement.appendChild(dayHeader);
+          
+          const gamesContainer = document.createElement('div');
+          gamesContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
+          
+          matchDay.games.forEach((game, gameIndex) => {
+            const gameCard = document.createElement('div');
+            gameCard.className = 'match-card bg-white rounded-lg p-4 shadow-md';
+            gameCard.setAttribute('data-status', game.status);
+            gameCard.style.animationDelay = `${(dayIndex * 0.1) + (gameIndex * 0.05)}s`;
+            gameCard.classList.add('animate-delay');
+            
+            // Normalize team names for comparison
+            const team1Normalized = game.team1.toLowerCase();
+            const team2Normalized = game.team2.toLowerCase();
+            
+            // Find original team names with proper capitalization
+            const team1Original = teamsData.find(t => t.name.toLowerCase() === team1Normalized)?.name || game.team1;
+            const team2Original = teamsData.find(t => t.name.toLowerCase() === team2Normalized)?.name || game.team2;
+            
+            gameCard.innerHTML = `
+              <div class="flex items-center justify-between mb-2 text-xs text-gray-500">
+                <div class="flex items-center">
+                  <i class="fas fa-calendar-day mr-1"></i>
+                  <span>${matchDay.day.split(' - ')[1]}</span>
+                </div>
+                <div class="flex items-center">
+                  ${game.status === 'finished' ? 
+                    '<i class="fas fa-check-circle text-primary-500 mr-1"></i><span>Terminé</span>' : 
+                    '<i class="fas fa-clock mr-1"></i><span>21:00</span>'
+                  }
+                </div>
+              </div>
+              
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 bg-gray-200 rounded-full overflow-hidden flex items-center justify-center font-bold mr-2">
+                    ${team1Original.charAt(0)}
+                  </div>
+                  <span class="font-medium">${team1Original}</span>
+                </div>
+                
+                ${game.status === 'finished' ? `
+                  <div class="flex items-center justify-center bg-white rounded-lg px-3 py-1 shadow-sm">
+                    ${game.score ? `
+                      <span class="text-lg font-bold ${game.score.split('-')[0] > game.score.split('-')[1] ? 'text-primary-600' : ''}">
+                        ${game.score.split('-')[0]}
+                      </span>
+                      <span class="mx-1 text-gray-400">-</span>
+                      <span class="text-lg font-bold ${game.score.split('-')[1] > game.score.split('-')[0] ? 'text-primary-600' : ''}">
+                        ${game.score.split('-')[1]}
+                      </span>
+                    ` : '<span class="text-sm text-gray-500">N/A</span>'}
+                  </div>
+                ` : `
+                  <div class="flex items-center justify-center bg-white rounded-lg px-3 py-1 shadow-sm">
+                    <span class="text-sm text-gray-500">VS</span>
+                  </div>
+                `}
+                
+                <div class="flex items-center">
+                  <span class="font-medium">${team2Original}</span>
+                  <div class="w-8 h-8 bg-gray-200 rounded-full overflow-hidden flex items-center justify-center font-bold ml-2">
+                    ${team2Original.charAt(0)}
+                  </div>
+                </div>
+              </div>
+            `;
+            
+            gamesContainer.appendChild(gameCard);
+            
+            // Trigger animation after a small delay
+            setTimeout(() => {
+              gameCard.style.opacity = 1;
+            }, 50);
+          });
+          
+          dayElement.appendChild(gamesContainer);
+          matchesList.appendChild(dayElement);
+          
+          // Trigger animation after a small delay
+          setTimeout(() => {
+            dayElement.style.opacity = 1;
+          }, 50);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
