@@ -407,59 +407,50 @@
       });
       
       function renderStandings() {
-        // Sort teams
-        const sortedTeams = [...teamsData].sort((a, b) => {
-          let valueA, valueB;
-          
-          if (currentSort.field === 'goalDiff') {
-            valueA = a.goalsFor - a.goalsAgainst;
-            valueB = b.goalsFor - b.goalsAgainst;
-          } else {
-            valueA = a[currentSort.field];
-            valueB = b[currentSort.field];
-          }
-          
-          if (currentSort.direction === 'asc') {
-            return valueA - valueB;
-          } else {
-            return valueB - valueA;
-          }
-        });
-        
-        // Render teams
-        const standingsBody = document.getElementById('standings-body');
-        standingsBody.innerHTML = '';
-        
-        sortedTeams.forEach((team, index) => {
-          const goalDiff = team.goalsFor - team.goalsAgainst;
-          const formHTML = team.form.map(result => {
-            return `<span class="form-indicator form-${result}">${result}</span>`;
-          }).join('');
-          
-          const row = document.createElement('tr');
-          row.className = `team-row border-b hover:bg-gray-50 ${index < 3 ? 'bg-primary-50' : ''}`;
-          row.style.animationDelay = `${index * 0.05}s`;
-          row.classList.add('animate-delay');
-          
-          row.innerHTML = `
+    // Trier les équipes d'abord par points, puis par différence de buts en cas d'égalité
+    const sortedTeams = [...teamsData].sort((a, b) => {
+        // Comparer par points
+        if (a.points !== b.points) {
+            return b.points - a.points; // Descendant par points
+        }
+
+        // Si les points sont égaux, comparer par différence de buts
+        const goalDiffA = a.goalsFor - a.goalsAgainst;
+        const goalDiffB = b.goalsFor - b.goalsAgainst;
+        return goalDiffB - goalDiffA; // Descendant par goalDiff
+    });
+
+    const standingsBody = document.getElementById('standings-body');
+    standingsBody.innerHTML = '';
+
+    sortedTeams.forEach((team, index) => {
+        const goalDiff = team.goalsFor - team.goalsAgainst;
+        const formHTML = team.form.map(result => `<span class="form-indicator form-${result}">${result}</span>`).join('');
+
+        const row = document.createElement('tr');
+        row.className = `team-row border-b hover:bg-gray-50 ${index < 3 ? 'bg-primary-50' : ''}`;
+        row.style.animationDelay = `${index * 0.05}s`;
+        row.classList.add('animate-delay');
+
+        row.innerHTML = `
             <td class="px-4 py-3 font-medium">
-              ${index < 3 ? `
-                <div class="flex items-center">
-                  ${index + 1}
-                  <i class="fas fa-trophy ml-1 ${
-                    index === 0 ? 'text-yellow-500' : 
-                    index === 1 ? 'text-gray-400' : 'text-amber-700'
-                  }"></i>
-                </div>
-              ` : index + 1}
+                ${index < 3 ? `
+                    <div class="flex items-center">
+                        ${index + 1}
+                        <i class="fas fa-trophy ml-1 ${
+                            index === 0 ? 'text-yellow-500' : 
+                            index === 1 ? 'text-gray-400' : 'text-amber-700'
+                        }"></i>
+                    </div>
+                ` : index + 1}
             </td>
             <td class="px-4 py-3 font-medium">
-              <div class="flex items-center">
-                <div class="w-6 h-6 mr-2 bg-gray-200 rounded-full overflow-hidden flex items-center justify-center text-xs font-bold">
-                  ${team.name.charAt(0)}
+                <div class="flex items-center">
+                    <div class="w-6 h-6 mr-2 bg-gray-200 rounded-full overflow-hidden flex items-center justify-center text-xs font-bold">
+                        ${team.name.charAt(0)}
+                    </div>
+                    ${team.name}
                 </div>
-                ${team.name}
-              </div>
             </td>
             <td class="px-4 py-3">${team.played}</td>
             <td class="px-4 py-3">${team.wins}</td>
@@ -468,25 +459,26 @@
             <td class="px-4 py-3">${team.goalsFor}</td>
             <td class="px-4 py-3">${team.goalsAgainst}</td>
             <td class="px-4 py-3">
-              <span class="${
-                goalDiff > 0 ? 'text-green-600' : 
-                goalDiff < 0 ? 'text-red-600' : ''
-              }">
-                ${goalDiff > 0 ? '+' : ''}${goalDiff}
-              </span>
+                <span class="${
+                    goalDiff > 0 ? 'text-green-600' : 
+                    goalDiff < 0 ? 'text-red-600' : ''
+                }">
+                    ${goalDiff > 0 ? '+' : ''}${goalDiff}
+                </span>
             </td>
             <td class="px-4 py-3 font-bold">${team.points}</td>
             <td class="px-4 py-3">${formHTML}</td>
-          `;
-          
-          standingsBody.appendChild(row);
-          
-          // Trigger animation after a small delay
-          setTimeout(() => {
+        `;
+
+        standingsBody.appendChild(row);
+
+        // Déclencher l'animation avec un léger délai
+        setTimeout(() => {
             row.style.opacity = 1;
-          }, 50);
-        });
-      }
+        }, 50);
+    });
+}
+
       
       function renderMatches() {
         const matchesList = document.getElementById('matches-list');
