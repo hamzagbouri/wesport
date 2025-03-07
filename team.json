@@ -2,7 +2,7 @@
     { "name": "Code Benders", "played": 1, "wins": 1, "draws": 0, "losses": 0, "goalsFor": 9, "goalsAgainst": 4, "points": 3, "form": ["W"] },
     { "name": "Code Breakers", "played": 2, "wins": 0, "draws": 0, "losses": 2, "goalsFor": 9, "goalsAgainst": 15, "points": 0, "form": ["L","L"] },
     { "name": "CodeShogun", "played": 2, "wins": 1, "draws": 0, "losses": 1, "goalsFor": 10, "goalsAgainst": 13, "points": 3, "form": ["L","W"] },
-    { "name": "Quanta Pixels", "played": 1, "wins": 1, "draws": 0, "losses": 0, "goalsFor": 4, "goalsAgainst": 2, "points": 0, "form": ["W"] },
+    { "name": "Quanta Pixels", "played": 1, "wins": 1, "draws": 0, "losses": 0, "goalsFor": 4, "goalsAgainst": 2, "points": 3, "form": ["W"] },
     { "name": "Enigma FC", "played": 1, "wins": 1, "draws": 0, "losses": 0, "goalsFor": 8, "goalsAgainst": 4, "points": 3, "form": ["W"] },
     { "name": "Javartalona", "played": 0, "wins": 0, "draws": 0, "losses": 0, "goalsFor": 0, "goalsAgainst": 0, "points": 0, "form": [] },
     { "name": "Hassan Team", "played": 1, "wins": 0, "draws": 0, "losses": 1, "goalsFor": 2, "goalsAgainst": 4, "points": 0, "form": ["L"] }
