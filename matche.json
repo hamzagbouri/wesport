@@ -61,8 +61,8 @@
             "status": "upcoming"
           },
           {
-            "team1": "Code Breakers",
-            "team2": "enigma",
+            "team1": "codeshogun",
+            "team2": "hassan team",
             "score": "",
             "status": "upcoming"
           }
@@ -72,8 +72,8 @@
         "day": "Journée 5 - 13/03",
         "games": [
           {
-            "team1": "codeshogun",
-            "team2": "hassan team",
+            "team1": "Code Breakers",
+            "team2": "enigma",
             "score": "",
             "status": "upcoming"
           },
