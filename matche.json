@@ -73,7 +73,7 @@
         "games": [
           {
             "team1": "codeshogun",
-            "team2": "hassan team",
+            "team2": "Fc Javartalona",
             "score": "",
             "status": "upcoming"
           },
@@ -95,8 +95,8 @@
             "status": "upcoming"
           },
           {
-            "team1": "enigma",
-            "team2": "Fc Javartalona",
+            "team1": "codeshogun",
+            "team2": "hassan team",
             "score": "",
             "status": "upcoming"
           }
@@ -112,7 +112,7 @@
             "status": "upcoming"
           },
           {
-            "team1": "codeshogun",
+            "team1": "enigma",
             "team2": "Fc Javartalona",
             "score": "",
             "status": "upcoming"
