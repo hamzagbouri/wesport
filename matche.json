@@ -55,8 +55,8 @@
         "day": "Journée 4 - 10/03",
         "games": [
           {
-            "team1": "hassan team",
-            "team2": "Fc Javartalona",
+            "team1": "codeshogun",
+            "team2": "hassan team",
             "score": "",
             "status": "upcoming"
           },
@@ -79,7 +79,7 @@
           },
           {
             "team1": "quanta pixels",
-            "team2": "Code Benders",
+            "team2": "Code Breakers",
             "score": "",
             "status": "upcoming"
           }
@@ -89,14 +89,14 @@
         "day": "Journée 6 - 16/03",
         "games": [
           {
-            "team1": "Code Breakers",
+            "team1": "Code Benders",
             "team2": "quanta pixels",
             "score": "",
             "status": "upcoming"
           },
           {
-            "team1": "codeshogun",
-            "team2": "hassan team",
+            "team1": "hassan team",
+            "team2": "Fc Javartalona",
             "score": "",
             "status": "upcoming"
           }
@@ -106,8 +106,8 @@
         "day": "Journée 7 - 17/03",
         "games": [
           {
-            "team1": "Code Benders",
-            "team2": "hassan team",
+            "team1": "--",
+            "team2": "--",
             "score": "",
             "status": "upcoming"
           },
