@@ -72,7 +72,7 @@
         "day": "Journée 5 - 13/03",
         "games": [
           {
-            "team1": "codeshogun",
+            "team1": "hassan team",
             "team2": "Fc Javartalona",
             "score": "",
             "status": "upcoming"
@@ -91,14 +91,14 @@
           {
             "team1": "Code Benders",
             "team2": "quanta pixels",
-            "score": "",
-            "status": "upcoming"
+            "score": "4-4",
+            "status": "finished"
           },
           {
-            "team1": "hassan team",
+            "team1": "codeshogun",
             "team2": "Fc Javartalona",
-            "score": "",
-            "status": "upcoming"
+            "score": "2-7",
+            "status": "finished"
           }
         ]
       },
