@@ -52,35 +52,19 @@
           }
         ]
       },
-      {
-        "day": "Journée 7 - 17/03",
-        "games": [
-          {
-            "team1": "Code Breakers",
-            "team2": "hassan team",
-            "score": "",
-            "status": "upcoming"
-          },
-          {
-            "team1": "enigma",
-            "team2": "Fc Javartalona",
-            "score": "",
-            "status": "upcoming"
-          }
-        ]
-      },
+      
       {
         "day": "Journée 3 - 20/03",
         "games": [
           {
-            "team1": "Code Benders",
-            "team2": "hassan team",
+            "team1": "Code Breakers",
+            "team2": "Fc Javartalona",
             "score": "",
             "status": "upcoming"
           },
           {
             "team1": "enigma",
-            "team2": "quanta pixels",
+            "team2": "Code Benders",
             "score": "",
             "status": "upcoming"
           }
@@ -91,13 +75,13 @@
         "games": [
           {
             "team1": "Code Breakers",
-            "team2": "Fc Javartalona",
+            "team2": "quanta pixels",
             "score": "",
             "status": "upcoming"
           },
           {
-            "team1": "--",
-            "team2": "--",
+            "team1": "enigma",
+            "team2": "Fc Javartalona",
             "score": "",
             "status": "upcoming"
           }
