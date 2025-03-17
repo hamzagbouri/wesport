@@ -34,57 +34,7 @@
           }
         ]
       },
-      {
-        "day": "Journée 3 - 09/03",
-        "games": [
-          {
-            "team1": "Code Benders",
-            "team2": "Fc Javartalona",
-            "score": "",
-            "status": "upcoming"
-          },
-          {
-            "team1": "enigma",
-            "team2": "quanta pixels",
-            "score": "",
-            "status": "upcoming"
-          }
-        ]
-      },
-      {
-        "day": "Journée 4 - 10/03",
-        "games": [
-          {
-            "team1": "codeshogun",
-            "team2": "hassan team",
-            "score": "",
-            "status": "upcoming"
-          },
-          {
-            "team1": "Code Breakers",
-            "team2": "enigma",
-            "score": "",
-            "status": "upcoming"
-          }
-        ]
-      },
-      {
-        "day": "Journée 5 - 13/03",
-        "games": [
-          {
-            "team1": "hassan team",
-            "team2": "Fc Javartalona",
-            "score": "",
-            "status": "upcoming"
-          },
-          {
-            "team1": "quanta pixels",
-            "team2": "Code Breakers",
-            "score": "",
-            "status": "upcoming"
-          }
-        ]
-      },
+     
       {
         "day": "Journée 6 - 16/03",
         "games": [
@@ -106,14 +56,76 @@
         "day": "Journée 7 - 17/03",
         "games": [
           {
-            "team1": "--",
-            "team2": "--",
+            "team1": "Code Breakers",
+            "team2": "hassan team",
             "score": "",
             "status": "upcoming"
           },
           {
             "team1": "enigma",
             "team2": "Fc Javartalona",
+            "score": "",
+            "status": "upcoming"
+          }
+        ]
+      },
+      {
+        "day": "Journée 3 - 20/03",
+        "games": [
+          {
+            "team1": "Code Benders",
+            "team2": "hassan team",
+            "score": "",
+            "status": "upcoming"
+          },
+          {
+            "team1": "Fc Javartalona",
+            "team2": "quanta pixels",
+            "score": "",
+            "status": "upcoming"
+          }
+        ]
+      },
+      {
+        "day": "Journée 4 - 23/03",
+        "games": [
+          {
+            "team1": "Code Breakers",
+            "team2": "enigma",
+            "score": "",
+            "status": "upcoming"
+          },
+          {
+            "team1": "--",
+            "team2": "--",
+            "score": "",
+            "status": "upcoming"
+          }
+        ]
+      },
+      {
+        "day": "Demi Final - 25/03",
+        "games": [
+          {
+            "team1": "1er",
+            "team2": "4eme",
+            "score": "",
+            "status": "upcoming"
+          },
+          {
+            "team1": "2eme",
+            "team2": "3eme",
+            "score": "",
+            "status": "upcoming"
+          }
+        ]
+      },
+      {
+        "day": "Final - 27/03",
+        "games": [
+          {
+            "team1": "Gagnant 1",
+            "team2": "Gagnant 2",
             "score": "",
             "status": "upcoming"
           }
