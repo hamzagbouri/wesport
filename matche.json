@@ -74,16 +74,16 @@
         "day": "Journée 4 - 23/03",
         "games": [
           {
-            "team1": "Code Breakers",
-            "team2": "quanta pixels",
+            "team1": "--",
+            "team2": "--",
             "score": "",
             "status": "upcoming"
           },
           {
             "team1": "enigma",
-            "team2": "Fc Javartalona",
-            "score": "",
-            "status": "upcoming"
+            "team2": "quanta pixels",
+            "score": "5-5",
+            "status": "finished"
           }
         ]
       },
@@ -91,14 +91,14 @@
         "day": "Demi Final - à venir",
         "games": [
           {
-            "team1": "1er",
-            "team2": "4eme",
+            "team1": "Code Benders",
+            "team2": "quanta pixels",
             "score": "",
             "status": "upcoming"
           },
           {
-            "team1": "2eme",
-            "team2": "3eme",
+            "team1": "enigma",
+            "team2": "Code Breakers",
             "score": "",
             "status": "upcoming"
           }
