@@ -93,14 +93,14 @@
           {
             "team1": "Code Benders",
             "team2": "quanta pixels",
-            "score": "",
-            "status": "upcoming"
+            "score": "8-4",
+            "status": "finished"
           },
           {
             "team1": "enigma",
             "team2": "Code Breakers",
-            "score": "",
-            "status": "upcoming"
+            "score": "1-5",
+            "status": "finished"
           }
         ]
       },
@@ -108,8 +108,8 @@
         "day": "Final -  27/03",
         "games": [
           {
-            "team1": "Gagnant 1",
-            "team2": "Gagnant 2",
+            "team1": "Code Benders",
+            "team2": "Code Breakers",
             "score": "",
             "status": "upcoming"
           }
